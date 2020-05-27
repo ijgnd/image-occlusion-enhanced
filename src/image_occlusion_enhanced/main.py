@@ -21,6 +21,7 @@ import sys
 
 from anki.lang import _
 from aqt.qt import *
+from aqt import gui_hooks
 
 from aqt import mw
 from aqt.editor import Editor, EditorWebView
@@ -157,7 +158,8 @@ def contextMenuEvent(self, evt):
         a = m.addAction(_("Open Image"))
         a.triggered.connect(lambda _, u=path: openImage(u))
     ##################################################
-    runHook("EditorWebView.contextMenuEvent", self, m)
+    # runHook("EditorWebView.contextMenuEvent", self, m)
+    gui_hooks.editor_will_show_context_menu(self, m)
     m.popup(QCursor.pos())
 
 
